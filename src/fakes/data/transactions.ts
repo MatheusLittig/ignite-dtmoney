@@ -1,6 +1,6 @@
-export const tableHeader = ["Título", "Valor", "Categoria", "Data"];
+import { TransactionProps } from "../../interfaces/transactions";
 
-export const tableData = [
+export const transactions: TransactionProps[] = [
   {
     name: "Desenvolvimento de Website",
     value: 12000.99,

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { TransactionProps } from '../../../../interfaces/transactions';
+import { api } from '../../../../services/api';
 
 import { Container } from './styles';
 
-import { tableData, tableHeader } from './constants';
-
 const TrasactionsTable: React.FC = () => {
+  const tableHeader = ["Título", "Valor", "Categoria", "Data"];
+  const [transactions, setTransactions] = useState<TransactionProps[]>()
+
+  useEffect(() => {
+    api.get('transactions')
+      .then(response => setTransactions(response.data))
+  }, [])
   
   return (
     <Container>
@@ -12,13 +20,13 @@ const TrasactionsTable: React.FC = () => {
         <thead>
           <tr>
             {tableHeader.map(column => (
-              <th>{column}</th>
+              <th key={column}>{column}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {tableData.map(launch => (
-            <tr>
+          {transactions?.map(launch => (
+            <tr key={launch.name}>
               <td>{launch.name}</td>
               <td className={launch.type === 'deposit'
                 ? 'deposit' : 'withdraw'
