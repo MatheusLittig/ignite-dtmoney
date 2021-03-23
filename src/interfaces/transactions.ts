@@ -1,7 +1,8 @@
 export interface TransactionProps {
+  id: number;
   name: string;
   value: number;
   category: string;
-  date: string;
-  type: 'deposit' | 'debt' | null
+  date: string | Date;
+  type: string | null
 }
